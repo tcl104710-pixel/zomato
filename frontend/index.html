@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zomato AI Restaurant Recommender</title>
+    <meta name="description" content="AI-powered restaurant recommendations using Groq LLM.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/index.css">
+</head>
+<body>
+
+    <!-- ========== HEADER ========== -->
+    <header class="header" id="header">
+        <div class="header__container">
+            <div class="header__brand">
+                <h1 class="header__title">Culinary<span>Intelligence</span></h1>
+            </div>
+            <div class="header__badge">
+                <span class="header__badge-dot"></span>
+                Powered by AI
+            </div>
+        </div>
+    </header>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main class="main">
+
+        <!-- ===== LEFT: CONFIGURATION PANEL ===== -->
+        <aside class="config-panel">
+            <h2 class="config-panel__title">Find Your Next Meal</h2>
+            <p class="config-panel__desc">Set your preferences and let our AI curate the perfect dining experience for you.</p>
+
+            <form class="form" id="recommendation-form" autocomplete="off">
+                <!-- Location -->
+                <div class="form__group">
+                    <label class="form__label" for="location-select">Location</label>
+                    <select class="form__select" id="location-select" required>
+                        <option value="" disabled selected>Loading locations...</option>
+                    </select>
+                </div>
+
+                <!-- Budget -->
+                <div class="form__group">
+                    <label class="form__label" for="budget-select">Budget</label>
+                    <select class="form__select" id="budget-select">
+                        <option value="low">Low (&#8377;0 – &#8377;500)</option>
+                        <option value="medium" selected>Medium (&#8377;501 – &#8377;1500)</option>
+                        <option value="high">High (&#8377;1501+)</option>
+                    </select>
+                </div>
+
+                <!-- Cuisine -->
+                <div class="form__group">
+                    <label class="form__label" for="cuisine-select">Cuisine</label>
+                    <select class="form__select" id="cuisine-select">
+                        <option value="">Any cuisine</option>
+                    </select>
+                </div>
+
+                <!-- Min Rating -->
+                <div class="form__group">
+                    <label class="form__label" for="min-rating">Minimum Rating</label>
+                    <div class="form__slider-wrap">
+                        <input type="range" class="form__slider" id="min-rating" min="0" max="5" step="0.5" value="3.0">
+                        <span class="form__rating-value" id="rating-display">3.0</span>
+                    </div>
+                </div>
+
+                <!-- Additional Preferences -->
+                <div class="form__group">
+                    <label class="form__label" for="additional-prefs">Additional Preferences</label>
+                    <textarea class="form__textarea" id="additional-prefs" rows="3" maxlength="500" placeholder="e.g., rooftop, romantic, live music, family-friendly..."></textarea>
+                </div>
+
+                <!-- Submit -->
+                <button type="submit" class="form__submit" id="recommend-btn">
+                    <span>Get AI Recommendations</span>
+                </button>
+            </form>
+        </aside>
+
+        <!-- ===== RIGHT: RESULTS FEED ===== -->
+        <section class="results-feed">
+
+            <!-- Banners -->
+            <div id="filters-bar" style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px;"></div>
+            <div id="relaxation-notice" class="alert-banner alert-banner--warning" hidden></div>
+
+            <!-- Loading Skeleton -->
+            <div class="skeleton-cards" id="loading-overlay" hidden>
+                <div class="skeleton-card">
+                    <div class="skeleton-pulse skeleton-title"></div>
+                    <div class="skeleton-pulse skeleton-meta"></div>
+                    <div class="skeleton-pulse skeleton-text"></div>
+                    <div class="skeleton-pulse skeleton-text-short"></div>
+                </div>
+                <div class="skeleton-card">
+                    <div class="skeleton-pulse skeleton-title"></div>
+                    <div class="skeleton-pulse skeleton-meta"></div>
+                    <div class="skeleton-pulse skeleton-text"></div>
+                    <div class="skeleton-pulse skeleton-text-short"></div>
+                </div>
+                <div class="skeleton-card">
+                    <div class="skeleton-pulse skeleton-title"></div>
+                    <div class="skeleton-pulse skeleton-meta"></div>
+                    <div class="skeleton-pulse skeleton-text"></div>
+                    <div class="skeleton-pulse skeleton-text-short"></div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results-section" hidden>
+                <!-- AI Summary -->
+                <div class="ai-summary" id="ai-summary"></div>
+                
+                <!-- Recommendation Cards -->
+                <div id="results-container" style="display: flex; flex-direction: column; gap: 24px; margin-top: 24px;"></div>
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="empty-state" hidden>
+                <div class="empty-state__icon">🍽️</div>
+                <h3 class="empty-state__title">No restaurants found</h3>
+                <p class="empty-state__desc" id="empty-state-message">Try adjusting your filters for broader results.</p>
+                <button class="form__submit" id="try-again-btn" style="max-width: 200px; margin: 16px auto; display: block;">Try Different Filters</button>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Global Toast (e.g. Server errors) -->
+    <div class="toast" id="error-toast" data-visible="false">
+        <span id="error-message">Something went wrong.</span>
+    </div>
+
+    <script src="scripts/app.js"></script>
+</body>
+</html>
