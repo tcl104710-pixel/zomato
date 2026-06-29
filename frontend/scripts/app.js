@@ -12,7 +12,10 @@
     'use strict';
 
     // ── Configuration ────────────────────────────────────────────
-    const API_BASE = window.location.origin;
+    const IS_PROD = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+    const API_BASE = IS_PROD 
+        ? 'https://your-railway-app-name.up.railway.app' // TODO: Replace with actual Railway domain
+        : window.location.origin;
 
     // ── DOM References ───────────────────────────────────────────
     const $  = (sel) => document.querySelector(sel);
