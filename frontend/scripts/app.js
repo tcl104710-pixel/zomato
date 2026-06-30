@@ -14,7 +14,7 @@
     // ── Configuration ────────────────────────────────────────────
     const IS_PROD = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
     const API_BASE = IS_PROD 
-        ? 'https://your-railway-app-name.up.railway.app' // TODO: Replace with actual Railway domain
+        ? 'https://zomato-production.up.railway.app' 
         : window.location.origin;
 
     // ── DOM References ───────────────────────────────────────────
