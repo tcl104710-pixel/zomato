@@ -42,8 +42,14 @@ Railway natively supports Python and FastAPI. It will look for your `requirement
 2. **New Project**: Click **New Project** -> **Deploy from GitHub repo** -> Select the `tcl104710-pixel/zomato` repository.
 3. **Configure the Service**:
    - Railway will automatically detect the Python environment.
-   - Go to the **Variables** tab for the newly created service and add your Groq API key:
+   - Go to the **Variables** tab for the newly created service and add your environment variables:
      - `GROQ_API_KEY` = `your-api-key-here`
+     - `LLM_MODEL` = `llama-3.3-70b-versatile`
+     - `LLM_TEMPERATURE` = `0.4`
+     - `LLM_MAX_TOKENS` = `1024`
+     - `DATA_PATH` = `data/processed/zomato_cleaned.csv`
+     - `TOP_N_RESULTS` = `5`
+     - `MAX_SHORTLIST` = `20`
 4. **Set the Start Command**:
    - Go to the **Settings** tab.
    - Under **Deploy** -> **Start Command**, enter:
@@ -65,8 +71,14 @@ Vercel is perfect for serving the static files located in the `frontend/` direct
 2. **Create an Account**: Sign up at [Vercel.com](https://vercel.com/) and link your GitHub account.
 3. **Add New Project**: Click **Add New** -> **Project** -> Import the `tcl104710-pixel/zomato` repository.
 4. **Configure Project**:
-   - **Framework Preset**: Leave as "Other".
+   - **Project Name**: Leave as `zomato` or customize it to your preference.
+   - **Framework Preset**: Change this to **Other** (Vercel may incorrectly default to Next.js).
    - **Root Directory**: Click "Edit" and select the `frontend` folder. (This tells Vercel to serve the `index.html` from this folder).
+   - **Build and Output Settings** (Expand this section to double-check):
+     - **Build Command**: Toggle "Override" ON and leave the field **blank**.
+     - **Output Directory**: Toggle "Override" ON and leave the field **blank**.
+     - **Install Command**: Toggle "Override" ON and leave the field **blank**.
+   - **Environment Variables**: No environment variables are needed for the frontend.
 5. **Deploy**: Click **Deploy**.
 6. **Verify**: Once complete, Vercel will provide a live URL (e.g., `zomato-ai.vercel.app`). Open it to verify the UI loads and successfully communicates with the Railway backend!
 
