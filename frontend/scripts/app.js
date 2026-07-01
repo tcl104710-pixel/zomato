@@ -14,7 +14,7 @@
     // ── Configuration ────────────────────────────────────────────
     const IS_PROD = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
     const API_BASE = IS_PROD 
-        ? 'https://zomato-production.up.railway.app' 
+        ? 'https://zomato-production-eeb1.up.railway.app' 
         : window.location.origin;
 
     // ── DOM References ───────────────────────────────────────────
