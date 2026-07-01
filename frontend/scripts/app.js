@@ -268,10 +268,11 @@
 
         const primaryCuisine = rec.cuisine ? rec.cuisine.split(',')[0].trim().toLowerCase() : 'food';
         const imageUrl = `https://loremflickr.com/600/340/${encodeURIComponent(primaryCuisine)},food/all?lock=${rec.rank}`;
+        const fallbackUrl = 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80';
 
         card.innerHTML = `
             <div class="card__image-container">
-                <img src="${imageUrl}" alt="${escapeHtml(rec.restaurant_name)}" class="card__image" loading="lazy" onerror="this.src='https://loremflickr.com/600/340/food/all?lock=${rec.rank}'">
+                <img src="${imageUrl}" alt="${escapeHtml(rec.restaurant_name)}" class="card__image" loading="lazy" onerror="this.onerror=null; this.src='${fallbackUrl}';">
                 <div class="card__badge">${rec.rank === 1 ? '🥇 Top Match' : 'Recommended'}</div>
                 <div class="card__rank ${rec.rank === 1 ? 'card__rank--1' : ''}">#${rec.rank}</div>
             </div>
