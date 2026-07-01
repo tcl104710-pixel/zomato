@@ -31,9 +31,9 @@ _RETRY_DELAY_SECONDS = 2
 
 # System prompt for the LLM
 _SYSTEM_PROMPT = (
-    "You are a friendly restaurant recommendation assistant. "
-    "You rank restaurants based on how well they match user preferences. "
-    "Respond ONLY in valid JSON — no markdown, no code fences, no extra text."
+    "You are a strict JSON data formatter. You rank restaurants based on how well they match user preferences. "
+    "Respond ONLY in valid JSON. The 'restaurant_name' field MUST contain ONLY the exact name of the restaurant from the provided list, with NO conversational text. "
+    "Put all conversational explanations in the 'explanation' and 'summary' fields."
 )
 
 

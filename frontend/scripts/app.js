@@ -247,7 +247,7 @@
     function renderSummary(summaryText) {
         dom.aiSummary.innerHTML = `
             <div class="results__summary-label">
-                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"/></svg>
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"/></svg>
                 AI Summary
             </div>
             <p>${escapeHtml(summaryText)}</p>
@@ -300,9 +300,9 @@
                          aria-expanded="true"
                          aria-controls="${explanationId}"
                          onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); document.getElementById('${explanationId}').dataset.collapsed = this.getAttribute('aria-expanded') === 'false';">
-                        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"/></svg>
+                        <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"/></svg>
                         Why this restaurant?
-                        <svg viewBox="0 0 20 20" fill="currentColor" style="margin-left:auto"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+                        <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor" style="margin-left:auto"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
                     </div>
                     <p class="card__explanation-text" id="${explanationId}" data-collapsed="false">
                         ${escapeHtml(rec.explanation)}
