@@ -266,39 +266,47 @@
 
         const explanationId = `explanation-${rec.rank}`;
 
+        const primaryCuisine = rec.cuisine ? rec.cuisine.split(',')[0].trim().toLowerCase() : 'food';
+        const imageUrl = `https://loremflickr.com/600/340/${encodeURIComponent(primaryCuisine)},food/all?lock=${rec.rank}`;
+
         card.innerHTML = `
-            <div class="card__rank ${rec.rank === 1 ? 'card__rank--1' : ''}">#${rec.rank}</div>
-
-            <div class="card__header">
-                <h3 class="card__name">${escapeHtml(rec.restaurant_name)}</h3>
-                <div class="card__meta">
-                    <span class="card__meta-item">
-                        ${renderStars(rec.rating)}
-                        <span class="card__rating-num">${rec.rating.toFixed(1)}</span>
-                    </span>
-                    <span class="card__meta-item card__budget card__budget--${budgetTier}" title="Estimated cost for two: ₹${cost.toFixed(0)}">
-                        ${budgetSymbols} ~₹${formatCost(cost)}
-                    </span>
-                    <span class="card__meta-item">
-                        ${formatCuisines(rec.cuisine)}
-                    </span>
-                </div>
+            <div class="card__image-container">
+                <img src="${imageUrl}" alt="${escapeHtml(rec.restaurant_name)}" class="card__image" loading="lazy" onerror="this.src='https://loremflickr.com/600/340/food/all?lock=${rec.rank}'">
+                <div class="card__badge">${rec.rank === 1 ? '🥇 Top Match' : 'Recommended'}</div>
+                <div class="card__rank ${rec.rank === 1 ? 'card__rank--1' : ''}">#${rec.rank}</div>
             </div>
-
-            <div class="card__explanation">
-                <div class="card__explanation-label"
-                     role="button"
-                     tabindex="0"
-                     aria-expanded="true"
-                     aria-controls="${explanationId}"
-                     onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); document.getElementById('${explanationId}').dataset.collapsed = this.getAttribute('aria-expanded') === 'false';">
-                    <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"/></svg>
-                    Why this restaurant?
-                    <svg viewBox="0 0 20 20" fill="currentColor" style="margin-left:auto"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            <div class="card__body">
+                <div class="card__header">
+                    <h3 class="card__name">${escapeHtml(rec.restaurant_name)}</h3>
+                    <div class="card__meta">
+                        <span class="card__meta-item">
+                            ${renderStars(rec.rating)}
+                            <span class="card__rating-num">${rec.rating.toFixed(1)}</span>
+                        </span>
+                        <span class="card__meta-item card__budget card__budget--${budgetTier}" title="Estimated cost for two: ₹${cost.toFixed(0)}">
+                            ${budgetSymbols} ~₹${formatCost(cost)}
+                        </span>
+                        <span class="card__meta-item">
+                            ${formatCuisines(rec.cuisine)}
+                        </span>
+                    </div>
                 </div>
-                <p class="card__explanation-text" id="${explanationId}" data-collapsed="false">
-                    ${escapeHtml(rec.explanation)}
-                </p>
+
+                <div class="card__explanation">
+                    <div class="card__explanation-label"
+                         role="button"
+                         tabindex="0"
+                         aria-expanded="true"
+                         aria-controls="${explanationId}"
+                         onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); document.getElementById('${explanationId}').dataset.collapsed = this.getAttribute('aria-expanded') === 'false';">
+                        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"/></svg>
+                        Why this restaurant?
+                        <svg viewBox="0 0 20 20" fill="currentColor" style="margin-left:auto"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+                    </div>
+                    <p class="card__explanation-text" id="${explanationId}" data-collapsed="false">
+                        ${escapeHtml(rec.explanation)}
+                    </p>
+                </div>
             </div>
         `;
 
